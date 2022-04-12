@@ -37,10 +37,18 @@ public class Server {
     public static String getAllLists(){
         StringBuilder val = new StringBuilder();
         for(String k: lists.keySet()){
-            val.append(k).append("\n");
+            val.append(k).append(":\n");
            for(String element: lists.get(k)){
                val.append(element).append("\n");
            }
+        }
+        return val.toString();
+    }
+
+    public static String getListsName(){
+        StringBuilder val = new StringBuilder();
+        for(String k: lists.keySet()) {
+            val.append(k).append("\n");
         }
         return val.toString();
     }
@@ -49,7 +57,7 @@ public class Server {
         String menu = "\n\n1) Imprimir listas\n"
                 + "2) Inserir em uma lista existente\n"
                 + "3) Criar nova lista\n"
-                + "4) Imprimir último valor adicionado\n"
+                + "4) Imprimir último elemento adicionado\n"
                 + "5) Remover elemento de uma lista\n"
                 + "6) Fechar conexão\n";
         return menu;
@@ -79,7 +87,8 @@ public class Server {
                     outputStream.writeUTF(getAllLists() + menu());
                     break;
                 case 2:
-                    outputStream.writeUTF("Digite uma lista existente");
+                    outputStream.writeUTF("Listas Existentes:" + getListsName() + "\nDigite qual lista");
+
                     listName = inputStream.readUTF();
 
                     outputStream.writeUTF("Digite o nome do elemento");

@@ -137,8 +137,7 @@ public class Server {
 
             message = inputStream.readUTF();
             opt = Integer.parseInt(message);
-            //listName = null;
-            //element = null;
+            
         }
     }
 

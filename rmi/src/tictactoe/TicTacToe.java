@@ -17,14 +17,35 @@ public class TicTacToe extends UnicastRemoteObject implements TicTacToeInterface
         this.numOfPlayers = 0;
     }
 
+    private boolean checkPlayer(Player player) {
+        for (Player p : players) {
+            if (p.getId() == player.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
-    public String enter(Player player) throws Exception {
-        if(numOfPlayers < 2){
-            this.players.add(player);
-            numOfPlayers++;
-            return "Welcome to TicTacToe "+ player.getName() + "You are the player number" + numOfPlayers;
+    public ReturnMessage enter(Player player) throws Exception {
+        ReturnMessage returnMessage = new ReturnMessage();
+        if(this.numOfPlayers < 2){
+            if (!checkPlayer(player)){
+                this.players.add(player);
+                returnMessage.setCode(1);
+                returnMessage.setMessage("Player " + player.getName() + " has entered the game");
+                numOfPlayers++;
+                return returnMessage;
+            }
+            else{
+                returnMessage.setCode(2);
+                returnMessage.setMessage("Player " + player.getId() + " already exists");
+                return returnMessage;
+            }
         }else {
-            return "Sorry, the game is full";
+            returnMessage.setCode(3);
+            returnMessage.setMessage("Game is full");
+            return returnMessage;
         }
     }
 

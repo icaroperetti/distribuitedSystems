@@ -1,7 +1,9 @@
 package tictactoe;
 
+import java.io.Serializable;
+
 //Client
-public class Player {
+public class Player implements Serializable {
     private String name;
     private int id;
 

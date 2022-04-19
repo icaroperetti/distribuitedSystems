@@ -9,7 +9,7 @@ public class Server {
     public static void main(String[] args) {
         System.setProperty("java.rmi.server.hostname", "localhost");
         try {
-            Registry registry = LocateRegistry.createRegistry(1245);
+            Registry registry = LocateRegistry.createRegistry(12345);
             TicTacToeInterface game = new TicTacToe();
 
             registry.bind("TicTacToe", game);

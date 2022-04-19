@@ -1,7 +1,6 @@
 package calculator;
 
-import calculator.CalcInterface;
-import calculator.Calculator;
+
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;

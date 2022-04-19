@@ -12,8 +12,8 @@ public class Client {
         try {
             Registry registry = LocateRegistry.getRegistry("localhost", 12345);
             CalcInterface calc = (CalcInterface) registry.lookup("CalcRemote");
-            Scanner in = new Scanner(System.in);
-            int opt = -1;
+
+            int opt;
             Scanner scanner = new Scanner(System.in);
             do{
                 System.out.println("Escolha um opção:");

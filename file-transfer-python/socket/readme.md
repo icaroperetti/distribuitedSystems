@@ -10,12 +10,15 @@ Instalação de dependências:
    pip install -r requirements.txt
 ```
 
-Execução do cliente e servidor:
+Execução do servidor:
 
 ```
-   1 - python server.py
+    python server.py 
+```
 
-   2 - python client.py
+Execução do cliente:
+```
+    python client.py 
 ```
 
 Depois de transferido o arquivo irá aparecer da seguinte maneira: <strong>receivedfile_nomedoarquivo.extensão</strong> na pasta <strong>received-files</strong>

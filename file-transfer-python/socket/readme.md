@@ -18,6 +18,6 @@ Execução do cliente e servidor:
    python client.py
 ```
 
-Depois de transferido o arquivo irá aparecer da seguinte maneira: <strong>receivedfile_nomedoarquivo.extensão</strong> na pasta received-files
+Depois de transferido o arquivo irá aparecer da seguinte maneira: <strong>receivedfile_nomedoarquivo.extensão</strong> na pasta <strong>received-files</strong>
 
 Para transferir arquivos maiores que 4mb a variavel <strong>BUFFER_SIZE</strong> deverá ser alterada.

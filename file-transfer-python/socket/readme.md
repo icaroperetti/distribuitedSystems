@@ -1,4 +1,4 @@
-# Transferência de Arquivos via socket
+# Transferência de arquivos via socket
 
 Para executar basta adicionar o arquivo que deseja trasnferir na raiz do projeto.
 

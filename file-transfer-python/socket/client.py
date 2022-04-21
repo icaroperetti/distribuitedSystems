@@ -38,10 +38,9 @@ progress_bar = tqdm.tqdm(range(
 
 with open(filename, "rb") as f:
     while True:
-
         bytes_read = f.read(BUFFER_SIZE)
+        
         if not bytes_read:
-
             break
 
         client.sendall(bytes_read)

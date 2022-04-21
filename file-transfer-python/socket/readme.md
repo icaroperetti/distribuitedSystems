@@ -1,5 +1,7 @@
 # Transferência de arquivos via socket
 
+- Python version 3.9.7
+
 Para executar basta adicionar o arquivo que deseja trasnferir na raiz do projeto.
 
 Executar os comandos abaixo:

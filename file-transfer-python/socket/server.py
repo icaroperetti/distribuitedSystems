@@ -29,6 +29,10 @@ filename, filesize = received.split(SEPARATOR)
 print("File name:", filename)
 
 path = "received-files"
+
+if not os.path.exists(path):
+    os.makedirs(path)
+
 filename = os.path.join(path, os.path.basename(f"receivedfile_{filename}"))
 
 

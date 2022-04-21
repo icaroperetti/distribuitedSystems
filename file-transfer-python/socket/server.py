@@ -30,6 +30,7 @@ print("File name:", filename)
 
 path = "received-files"
 
+#If the folder does not exists, create it
 if not os.path.exists(path):
     os.makedirs(path)
 

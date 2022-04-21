@@ -13,9 +13,9 @@ Instalação de dependências:
 Execução do cliente e servidor:
 
 ```
-   python server.py
+   1 - python server.py
 
-   python client.py
+   2 - python client.py
 ```
 
 Depois de transferido o arquivo irá aparecer da seguinte maneira: <strong>receivedfile_nomedoarquivo.extensão</strong> na pasta <strong>received-files</strong>

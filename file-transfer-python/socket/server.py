@@ -18,32 +18,23 @@ server.listen()
 print(f"Listening on {IP}:{PORT}")
 
 
-client_socket, address = server.accept()
+server, address = server.accept()
 
 print(f"{address} is connected.")
 
-received = client_socket.recv(BUFFER_SIZE).decode()
-print("Received", received)
 
-filename, filesize = received.split(SEPARATOR)
-print("File name:", filename)
+path = "files"
 
-path = "received-files"
+filename = server.recv(BUFFER_SIZE).decode()
 
-#If the folder does not exists, create it
-if not os.path.exists(path):
-    os.makedirs(path)
+address_file = os.path.join(path, os.path.basename(f"{filename}"))
 
-filename = os.path.join(path, os.path.basename(f"receivedfile_{filename}"))
+print(address_file)
 
 
-with open(filename, "wb") as f:
-    while True:
-        data = client_socket.recv(BUFFER_SIZE)
+with open(address_file, "rb") as f:
+    for data in f.readlines():
+        server.send(data)
 
-        if not data:
-            break
-        f.write(data)
 
-filesize = int(filesize)
 server.close()

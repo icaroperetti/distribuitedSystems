@@ -1,9 +1,9 @@
 import socket
 import os
 
-IP = socket.gethostbyname(socket.gethostname())
+IP = str(input("Enter IP: "))
 
-PORT = 8000
+PORT = int(input("Enter PORT: "))
 ADDR = (IP, PORT)
 
 SEPARATOR = "_"
@@ -29,9 +29,10 @@ path = "received-files"
 if not os.path.exists(path):
     os.makedirs(path)
 
-file_receive = os.path.join(path, os.path.basename(file))
+# Adapting to save to a path
+file_received = os.path.join(path, os.path.basename(f"received_file{file}"))
 
-with open(file_receive, "wb") as f:
+with open(file_received, "wb") as f:
     while True:
         data = client.recv(BUFFER_SIZE)
         if not data:

@@ -30,8 +30,4 @@ client.on("data", (data) => {
   fs.appendFileSync(fileName, data, () => {
     console.log("Receiving data!");
   });
-
-  client.on("close", () => {
-    console.log("Connection closed");
-  });
 });

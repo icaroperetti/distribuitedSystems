@@ -1,5 +1,5 @@
 import socket
-
+import tqdm
 import os
 
 
@@ -30,13 +30,17 @@ filename = server.recv(BUFFER_SIZE).decode()
 
 address_file = os.path.join(path, os.path.basename(f"{filename}"))
 
+filesize = os.path.getsize(address_file)
+
+progress_bar = tqdm.tqdm(range(
+    filesize), f"Sending {filename}", unit="B", unit_scale=True)
 
 print(address_file)
 
 with open(address_file, "rb") as f:
     for data in f.readlines():
-        # print(type(data))
-        server.send(data)
+        progress_bar.update(len(data))
+        server.sendall(data)
     print("File sent!")
 
 server.close()

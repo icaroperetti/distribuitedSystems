@@ -35,6 +35,6 @@ print(address_file)
 with open(address_file, "rb") as f:
     for data in f.readlines():
         server.send(data)
-
+    print("File sent!")
 
 server.close()

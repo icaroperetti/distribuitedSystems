@@ -2,6 +2,7 @@
 
 - Python version: 3.9.7
 - Node.JS version: 14.18.0
+- Testado com arquivos de até 7GB e funcionou com sucesso.
 
 Para executar basta adicionar o arquivo que deseja trasnferir na pasta <strong>files</strong> do projeto.
 

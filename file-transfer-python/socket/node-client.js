@@ -16,7 +16,7 @@ var fileName = readLine.createInterface({
 });
 
 client.connect(8000, "192.168.127.1", () => {
-  console.log("Digite o nome do arquivo: ");
+  console.log("Enter the filename.extension (like: music.mp3): ");
   fileName.addListener("line", (line) => {
     file_ext = line.split(".")[1];
     file_name = line.split(".")[0];
@@ -29,5 +29,6 @@ client.on("data", (data) => {
   fileName = `receivedfile_${file_name}.${file_ext}`;
   fs.appendFileSync(fileName, data, () => {
     console.log("Receiving data!");
+    client.disconnect();
   });
 });

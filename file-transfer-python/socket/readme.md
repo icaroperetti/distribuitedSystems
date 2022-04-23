@@ -26,3 +26,7 @@ Execução do cliente node:
 ```
   node node-client.js
 ```
+
+- Quando utilizando o cliente em node.js, os arquivos recebidos ficarão na raiz do projeto.
+
+- Quando utilizado o cliente em python, os arquivos recebidos ficarão na pasta <strong>received-files</strong> do projeto.

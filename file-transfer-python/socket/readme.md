@@ -1,8 +1,11 @@
 # Transferência de Arquivos via socket
 
-Para executar basta adicionar o arquivo que deseja trasnferir na raiz do projeto.
+- Python version: 3.9.7
+- Node.JS version: 14.18.0
 
-Executar os comandos abaixo:
+Para executar basta adicionar o arquivo que deseja trasnferir na pasta <strong>files</strong> do projeto.
+
+- Executar os comandos abaixo
 
 Instalação de dependências:
 

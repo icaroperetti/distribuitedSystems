@@ -9,12 +9,13 @@ PORT = 8000
 ADDR = (IP, PORT)
 
 
-BUFFER_SIZE = 4000000  # 4Mb
-SEPARATOR = "_"
+BUFFER_SIZE = 1024
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
 server.bind(ADDR)
-server.listen()
+server.listen(3)  # Limit of connections
+
 print(f"Listening on {IP}:{PORT}")
 
 
@@ -29,11 +30,12 @@ filename = server.recv(BUFFER_SIZE).decode()
 
 address_file = os.path.join(path, os.path.basename(f"{filename}"))
 
-print(address_file)
 
+print(address_file)
 
 with open(address_file, "rb") as f:
     for data in f.readlines():
+        # print(type(data))
         server.send(data)
     print("File sent!")
 

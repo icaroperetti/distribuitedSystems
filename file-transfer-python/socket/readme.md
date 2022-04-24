@@ -17,10 +17,11 @@ Execução do cliente e servidor:
 
 ```
    python server.py
-
-   python client.py
 ```
 
+```
+ python client.py
+```
 Execução do cliente node:
 
 ```

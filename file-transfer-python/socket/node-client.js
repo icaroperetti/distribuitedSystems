@@ -6,6 +6,7 @@ let extensionFile;
 const { on } = require("events");
 var fs = require("fs");
 var net = require("net");
+const { removeAllListeners } = require("process");
 var readLine = require("readline");
 
 const client = new net.Socket();
@@ -29,6 +30,12 @@ client.on("data", (data) => {
   fileName = `receivedfile_${file_name}.${file_ext}`;
   fs.appendFileSync(fileName, data, () => {
     console.log("Receiving data!");
-    client.disconnect();
+    client.end();
   });
+});
+
+client.on("end", () => {
+  console.log("disconnected from server");
+  client.destroy();
+ 
 });

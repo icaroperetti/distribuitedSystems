@@ -23,6 +23,7 @@ public class Client {
                 break;
             }
 
+            
             outputStream.writeUTF(in.nextLine());
             outputStream.flush();
         }

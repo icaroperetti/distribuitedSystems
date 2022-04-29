@@ -4,7 +4,7 @@
 - Ruby version: 3.1.1p18
 - Testado com arquivos de até 7GB e funcionou com sucesso.
 
-Para executar basta adicionar o arquivo que deseja trasnferir na pasta <strong>files</strong> do projeto.
+
 
 - Executar os comandos abaixo
 

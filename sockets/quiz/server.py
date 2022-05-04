@@ -7,7 +7,6 @@ import time
 
 IP = socket.gethostbyname(socket.gethostname())
 
-# input_port = int(input("Choose the PORT for the server: "))
 
 PORT = 8000
 
@@ -25,8 +24,11 @@ server.listen()
 
 print(f"Listening on {IP}:{PORT}")
 
+server, address = server.accept()
 
 # Get random question from a json file
+
+
 def get_question(numOfQ, file):
     question_list = []
     answer_list = []
@@ -39,8 +41,8 @@ def get_question(numOfQ, file):
             server.send("Não há mais questões!".encode())
             exit()
         question = random.choice(list(questions.keys()))
-        # Verifica se a questão já foi utilizada
-        # Se sim, escolhe novamente
+        # Check if the question is already in the list
+        # If it is, get another question
         while question in question_list:
             print("used", question, "\n\n")
             question = random.choice(list(questions.keys()))
@@ -52,21 +54,24 @@ def get_question(numOfQ, file):
     return answer_list, correct_list, question_list
 
 
+# Get the user and password from de file
 def getUserAndPassword(file):
     users = []
-    name = ''
-    password = ''
+    name = ""
+    password = ""
     with io.open(file, "r", encoding="utf8") as f:
         for l in f.readlines():
             name, password = l.strip('\n').split(":")
             users.append({
-                'name': name,
-                'password': password
+                "name": name,
+                "password": password
             })
     return users
 
 
 USERS = getUserAndPassword('users.txt')
+
+# Make Login
 
 
 def login():
@@ -126,11 +131,9 @@ def quiz():
     # Send result
     result = f"Você acertou {corrects} de {numOfQ}"
     server.send(result.encode())
-    print("Quiz finished.")
+    print("Quiz terminou")
     server.close()
 
-
-server, address = server.accept()
 
 login()
 quiz()

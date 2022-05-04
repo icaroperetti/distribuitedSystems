@@ -1,7 +1,7 @@
 import socket
 import os
 import time
-
+import platform
 
 IP = socket.gethostbyname(socket.gethostname())
 PORT = 8000
@@ -51,7 +51,11 @@ def quiz():
         res = client.recv(BUFFER_SIZE).decode()
         print("\n", res)
         time.sleep(1.5)
-        os.system("clear")
+
+        if platform.system() == "Windows":
+            os.system("cls")
+        elif platform.system() == "Linux":
+            os.system("clear")
 
     result = client.recv(BUFFER_SIZE).decode()
     print("\n", result)

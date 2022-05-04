@@ -22,5 +22,13 @@
   "Qual a primeira mulher a ganhar um prêmio Nobel?":{
     "answers":["1)Marie Curie","2)Dorothy Hodgkin","3)Johannes Kepler","4)Maria Gaetana"],
     "correct_answer": 1
+  },
+  "Chernobyl e Césio-137 fazem parte dos maiores acidentes nucleares da história. Em que países aconteceram?":{
+    "answers":["1)Rússia e Espanha","2)Ucrânia e Brasil","3) Estados Unidos e Ucrânia","4)Taiwan e Alemanha"],
+    "correct_answer": 2
+  },
+  "Onde será a copa do mundo de futebol de 2022?":{
+    "answers":["1)Moscou","2)Roma","3)Brasil","4)Catar"],
+    "correct_answer": 4
   }
 }

@@ -1,7 +1,7 @@
 import socket
 import os
 import time
-from unittest import result
+
 
 IP = socket.gethostbyname(socket.gethostname())
 PORT = 8000

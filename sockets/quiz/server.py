@@ -42,7 +42,7 @@ def get_question(numOfQ, file):
         answer_list.append(questions[question]['answers'])
         correct_list.append(questions[question]['correct_answer'])
 
-    return question, answer_list, correct_list, question_list
+    return answer_list, correct_list, question_list
 
 
 def getUserAndPassword(file):
@@ -86,22 +86,19 @@ def login():
 
 def quiz():
 
-    question, answer_list, correct_list, question_list = get_question(
-        3, 'questions.json')
+    answer_list, correct_list, question_list = get_question(
+        4, 'questions.json')
 
     corrects = 0
 
+    print("QUESTION LIST: ", question_list, "\n\n")
+
     numOfQ = len(question_list)
     server.send(str(numOfQ).encode())
-    time.sleep(7)
+    time.sleep(4)
 
     for i in range(numOfQ):
-        time.sleep(1.5)
-
-        # Check repeated questions
-        if question_list[i] in question_list[:i]:
-            print("Question repeated.")
-            question_list.choose(question_list[i])
+        time.sleep(2)
 
         # Send question
         server.send(str(question_list[i]+"\n"+str(answer_list[i])).encode())

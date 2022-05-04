@@ -12,7 +12,7 @@
     "correct_answer": 2
   },
   "Qual a velocidade da luz?": {
-    "answers": ["1)300 000 000 metros por segundo (m/s)", "2)150 000 000 metros por segundo (m/s)", "3)199 792 458 metros por segundo (m/s)", "4)299 792 458 metros por segundo (m/s)"],
+    "answers": ["1)300 000 000 (m/s)", "2)150 000 000 (m/s)", "3)199 792 458 (m/s)", "4)299 792 458 (m/s)"],
     "correct_answer": 4
   },
   "Qual das alternativas contém apenas vacinas contra a covid-19?":{

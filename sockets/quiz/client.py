@@ -1,7 +1,6 @@
 import socket
 import os
 import time
-import platform
 
 
 IP = socket.gethostbyname(socket.gethostname())
@@ -52,11 +51,7 @@ def quiz():
         res = client.recv(BUFFER_SIZE).decode()
         print("\n", res)
         time.sleep(1.5)
-
-        if platform.system() == "Windows":
-            os.system("cls")
-        elif platform.system() == "Linux":
-            os.system("clear")
+        os.system("clear")
 
     result = client.recv(BUFFER_SIZE).decode()
     print("\n", result)

@@ -98,7 +98,6 @@ def quiz():
     time.sleep(4)
 
     for i in range(numOfQ):
-        time.sleep(2)
 
         # Send question
         server.send(str(question_list[i]+"\n"+str(answer_list[i])).encode())
@@ -113,6 +112,7 @@ def quiz():
             server.send("Correta!".encode())
         else:
             server.send("Incorreta!".encode())
+        time.sleep(2.5)
 
     # Send result
     result = f"Você acertou {corrects} de {numOfQ}"

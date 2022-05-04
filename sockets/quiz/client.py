@@ -1,6 +1,7 @@
 import socket
 import os
 import time
+import platform
 
 
 IP = socket.gethostbyname(socket.gethostname())
@@ -25,6 +26,7 @@ def login():
     password = str(input("Digite a senha: "))
     client.send(name.encode())
     client.send(password.encode())
+
     res = client.recv(BUFFER_SIZE).decode().split(":")[1]
     authorized = eval(res)
 
@@ -48,10 +50,16 @@ def quiz():
         client.send(str(answer).encode())
 
         res = client.recv(BUFFER_SIZE).decode()
-        print(res)
+        print("\n", res)
+        time.sleep(1.5)
+
+        if platform.system() == "Windows":
+            os.system("cls")
+        elif platform.system() == "Linux":
+            os.system("clear")
 
     result = client.recv(BUFFER_SIZE).decode()
-    print(result)
+    print("\n", result)
 
 
 login()

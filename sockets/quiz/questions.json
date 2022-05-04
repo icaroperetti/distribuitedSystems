@@ -1,18 +1,26 @@
 {
-  "De quem é a famosa frase “Penso, logo existo”": {
+  "De quem é a famosa frase: 'Penso, logo existo'": {
     "answers": [ "1)Platão", "2)Galileu", "3)Sócrates", "4)Descartes" ],
     "correct_answer": 3
   },
-  "De onde é a invenção do chuveiro elétrico?": {
+  "De onde e a invenção do chuveiro elétrico?": {
     "answers": ["1)Inglaterra", "2)Brasil", "3)Itália", "4)Alemanha"],
     "correct_answer": 2
   },
-  "Em que período da pré-história o fogo foi descoberto?": {
-    "answers": ["1)Neolítico", "2)Paleolítico", "3)Período da Pedra Polida", "4)Idade Média"],
+  "Em que período da pre-história o fogo foi descoberto?": {
+    "answers": ["1)Neolítico", "2)Paleolítico", "3)Periodo da Pedra Polida", "4)Idade Media"],
     "correct_answer": 2
   },
   "Qual a velocidade da luz?": {
     "answers": ["1)300 000 000 metros por segundo (m/s)", "2)150 000 000 metros por segundo (m/s)", "3)199 792 458 metros por segundo (m/s)", "4)299 792 458 metros por segundo (m/s)"],
+    "correct_answer": 4
+  },
+  "Qual das alternativas contém apenas vacinas contra a covid-19?":{
+    "answers":["1) VIP/VOP e AstraZeneca","2)CoronaVac e AstraZeneca","3)HPV e BioNTech","4)entavalente (DTPa) e Sputnik V"],
+    "correct_answer": 2
+  },
+  "Qual a primeira mulher a ganhar um prêmio Nobel?":{
+    "answers":["1)Marie Curie","2)Dorothy Hodgkin","3)Johannes Kepler","4)Maria Gaetana"],
     "correct_answer": 1
   }
 }

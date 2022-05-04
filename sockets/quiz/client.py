@@ -1,9 +1,12 @@
 import socket
-
+import os
+import time
+from unittest import result
 
 IP = socket.gethostbyname(socket.gethostname())
 PORT = 8000
 
+BUFFER_SIZE = 1024
 
 ADDR = (IP, PORT)
 
@@ -17,18 +20,39 @@ except:
     exit()
 
 
-question = client.recv(1024).decode()
+def login():
+    name = str(input("Digite o seu nome de usuario: "))
+    password = str(input("Digite a senha: "))
+    client.send(name.encode())
+    client.send(password.encode())
+    res = client.recv(BUFFER_SIZE).decode().split(":")[1]
+    authorized = eval(res)
 
-answer_list = client.recv(1024).decode()
+    if authorized:
+        print("Autenticado.")
+        return
+    else:
+        print("Tente novamente")
+        login()
 
 
-print(question)
-print(answer_list)
+def quiz():
+    numOfQ = int(client.recv(BUFFER_SIZE).decode())
+    print("Numero de questoes:", numOfQ)
+
+    for i in range(int(numOfQ)):
+        question = client.recv(BUFFER_SIZE).decode()
+        print(question)
+
+        answer = int(input("Digite a sua resposta: "))
+        client.send(str(answer).encode())
+
+        res = client.recv(BUFFER_SIZE).decode()
+        print(res)
+
+    result = client.recv(BUFFER_SIZE).decode()
+    print(result)
 
 
-input_answer = input("Your answer: ")
-client.send(input_answer.encode())
-
-server_response = client.recv(1024).decode()
-
-print(server_response)
+login()
+quiz()

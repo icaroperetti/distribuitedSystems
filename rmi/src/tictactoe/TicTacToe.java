@@ -66,7 +66,7 @@ public class TicTacToe extends UnicastRemoteObject implements TicTacToeInterface
         StringBuilder boardString = new StringBuilder();
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
-                boardString.append(board[i][j]).append(" ");
+                boardString.append(board[i][j]).append("   ");
             }
             boardString.append("\n");
         }
@@ -122,9 +122,7 @@ public class TicTacToe extends UnicastRemoteObject implements TicTacToeInterface
     @Override
     //Make the play
     public void play(Player player, int row, int col) throws Exception {
-        row--;
-        col--;
-        this.board[row][col] = player.getId();
+        this.board[row - 1][col - 1] = player.getId();
     }
 
     @Override
@@ -143,13 +141,14 @@ public class TicTacToe extends UnicastRemoteObject implements TicTacToeInterface
     //Verifica se algum jogador ganhou
     public Boolean checkWin(){
         for(int i = 0; i < 3; i++) {
-            //Check rows
+            //Verifica linhas
             if (board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
                 if (board[i][0] != 0) {
                     return true;
                 }
             }
-            //Check columns
+
+            //Verifica colunas
             if (board[0][i] == board[1][i] && board[1][i] == board[2][i]) {
                 if (board[0][i] != 0) {
                     return true;

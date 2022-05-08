@@ -28,6 +28,9 @@ public class GameClient {
             //System.out.println(System.currentTimeMillis( )+"ms");
 
             id = (int) (System.currentTimeMillis() % (randomNumber * 2 + 1));
+            if(id == 0 || id == 1){
+                id += 1;
+            }
             System.out.println("Your id is: " + id);
 
             Player player = new Player(name, id, false);
@@ -43,7 +46,7 @@ public class GameClient {
 
             if(msg.getCode() == 1){
                 do{
-                    System.out.println("1 - Play\n2 - Exit");
+                    System.out.println("1 - Play");
                     opt = Integer.parseInt(in.nextLine());
                     if(opt == 1){
                         ticTacToe.getNumOfPlayers();
@@ -97,6 +100,7 @@ public class GameClient {
                         ticTacToe.exit();
                         return;
                     }
+
                 }while (opt != 0);
             }
         } catch (Exception e) {

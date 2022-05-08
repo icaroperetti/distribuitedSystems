@@ -16,25 +16,17 @@ public class GameClient {
             String name = in.nextLine();
             int id = 0;
 
-
             Random rand = new Random();
             int maxNumber = 10;
-
             int randomNumber = rand.nextInt(maxNumber) + 1;
-
-            //Gerando id para o jogador
-
-            //System.out.println("Gerando id para o jogador...");
-            //System.out.println(System.currentTimeMillis( )+"ms");
 
             id = (int) (System.currentTimeMillis() % (randomNumber * 2 + 1));
             if(id == 0 || id == 1){
                 id += 1;
             }
+
             System.out.println("Your id is: " + id);
-
             Player player = new Player(name, id, false);
-
 
             ReturnMessage msg = ticTacToe.enter(player);
             System.out.println(msg.getMessage());
@@ -69,13 +61,11 @@ public class GameClient {
                                     row = Integer.parseInt(in.nextLine());
                                     System.out.println("Enter col: ");
                                     col = Integer.parseInt(in.nextLine());
-                                    System.out.println("");
+
 
                                     validPlay = ticTacToe.isValidMove(row, col);
 
-                                    if (!validPlay) {
-                                        System.out.println("Invalid play!");
-                                    }else {
+                                    if(validPlay) {
                                         ticTacToe.play(player,row, col);
                                         ticTacToe.switchPlayer();
                                         if (ticTacToe.isGameOver()) {
@@ -85,6 +75,8 @@ public class GameClient {
                                             return;
                                         }
                                         stopLoop = false;
+                                    }else {
+                                        System.out.println("Invalid play,try again");
                                     }
                                 }while(!validPlay);
                             }else{

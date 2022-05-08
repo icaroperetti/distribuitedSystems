@@ -23,7 +23,6 @@ public class Server {
                     }
                 }
             }
-
         } catch (RemoteException | AlreadyBoundException e) {
             e.printStackTrace();
         } catch (Exception e) {

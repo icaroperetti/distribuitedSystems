@@ -14,13 +14,24 @@ public class GameClient {
             Scanner in = new Scanner(System.in);
             System.out.println("Enter your name: ");
             String name = in.nextLine();
-            Random r = new Random();
-//            int id = r.nextInt(10)+1;
+            int id = 0;
 
-            System.out.print("Forneca o id do seu usuario: ");
-            int id = Integer.parseInt(in.nextLine());
 
-            Player player = new Player(name, id,false);
+            Random rand = new Random();
+            int maxNumber = 10;
+
+            int randomNumber = rand.nextInt(maxNumber) + 1;
+
+            //Gerando id para o jogador
+
+            //System.out.println("Gerando id para o jogador...");
+            //System.out.println(System.currentTimeMillis( )+"ms");
+
+            id = (int) (System.currentTimeMillis() % (randomNumber * 2 + 1));
+            System.out.println("Your id is: " + id);
+
+            Player player = new Player(name, id, false);
+
 
             ReturnMessage msg = ticTacToe.enter(player);
             System.out.println(msg.getMessage());
@@ -49,7 +60,7 @@ public class GameClient {
                         while(!ticTacToe.isGameOver()){
                             if(ticTacToe.getPlayerTurn(id)){
                                 do {
-                                    System.out.println("Your turn," +player.getName());
+                                    System.out.println("Your turn," +player.getName() + "\nThe symbol will represent you in the game is: " + player.getId());
                                     System.out.println(ticTacToe.getBoard());
                                     System.out.println("Enter row: ");
                                     row = Integer.parseInt(in.nextLine());
@@ -60,7 +71,7 @@ public class GameClient {
                                     validPlay = ticTacToe.isValidMove(row, col);
 
                                     if (!validPlay) {
-                                        System.out.println("Invalid move!");
+                                        System.out.println("Invalid play!");
                                     }else {
                                         ticTacToe.play(player,row, col);
                                         ticTacToe.switchPlayer();
@@ -76,7 +87,7 @@ public class GameClient {
                             }else{
                                 if(!stopLoop){
                                     System.out.println("\n"+ ticTacToe.getBoard());
-                                    System.out.println("Waiting for to play");
+                                    System.out.println("Waiting  the other player to  make a play");
                                     stopLoop = true;
                                 }
                             }

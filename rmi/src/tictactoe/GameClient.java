@@ -58,6 +58,7 @@ public class GameClient {
                                     System.out.println("");
 
                                     validPlay = ticTacToe.isValidMove(row, col);
+
                                     if (!validPlay) {
                                         System.out.println("Invalid move!");
                                     }else {
@@ -65,7 +66,7 @@ public class GameClient {
                                         ticTacToe.switchPlayer();
                                         if (ticTacToe.isGameOver()) {
                                             System.out.println(ticTacToe.getBoard());
-                                            System.out.println("You won!");
+                                            System.out.println("You won! " + player.getName() + " ID:" + player.getId());
                                             ticTacToe.exit();
                                             return;
                                         }
@@ -75,7 +76,7 @@ public class GameClient {
                             }else{
                                 if(!stopLoop){
                                     System.out.println("\n"+ ticTacToe.getBoard());
-                                    System.out.println("Waiting for other player to play");
+                                    System.out.println("Waiting for to play");
                                     stopLoop = true;
                                 }
                             }
@@ -83,7 +84,6 @@ public class GameClient {
                         System.out.println(ticTacToe.getBoard());
                         System.out.println("Game ended, you lost!");
                         ticTacToe.exit();
-
                         return;
                     }
                 }while (opt != 0);

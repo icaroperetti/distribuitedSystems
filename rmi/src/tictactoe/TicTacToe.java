@@ -76,7 +76,7 @@ public class TicTacToe extends UnicastRemoteObject implements TicTacToeInterface
     @Override
     //Verifica se a jogada é válida
     public Boolean isValidMove(int x, int y) throws RemoteException {
-        if(x < 0 || x > 3 || y < 0 || y > 3){
+        if(x <= 0 || x > 3 || y <= 0 || y > 3){
             return false;
         }
         if(board[x - 1 ][y - 1] == 0){

@@ -17,11 +17,11 @@ public class GameClient {
 
 
             Random rand = new Random();
-            int maxNumber = 3;
+            int maxNumber = 130;
             int randomNumber = rand.nextInt(maxNumber) + 1;
             Date date = new Date();
 
-            id = (int) (date.getTime() % (randomNumber * 6 + 3));
+            id = (int) (date.getTime() % (randomNumber * 2 + 3));
 
             System.out.println("Your id is: " + id);
             Player player = new Player(name, id, false);

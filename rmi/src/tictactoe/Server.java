@@ -16,11 +16,9 @@ public class Server {
             System.out.println("Server ready");
 
             while(true){
-                if(game.isGameOver()){
-                    if(game.getNumOfPlayers() == 0){
-                        System.out.println("Game ended");
-                        break;
-                    }
+                if(game.isGameOver() && game.getNumOfPlayers() == 0){
+                    System.out.println("Game ended");
+                    break;
                 }
             }
         } catch (RemoteException | AlreadyBoundException e) {

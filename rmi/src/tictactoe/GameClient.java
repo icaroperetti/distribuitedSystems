@@ -70,20 +70,21 @@ public class GameClient {
                                     //Armazenando se a jogada é válida
                                     validPlay = ticTacToe.isValidMove(row, col);
 
-                                    //Se a jogada for validda, verifica se o jogo acabou
-                                    //Se a jogada for inválida, avisa que a jogada é inválida
-                                    if(validPlay) {
+                                    //Se a jogada for valida, verifica se o jogo acabou
+
+                                    if(validPlay){
                                         ticTacToe.play(player,row, col);
                                         ticTacToe.switchPlayer();
                                         //Se o jogador vencer nesta jogada,mostra o tabuleiro e termina o jogo
                                         if (ticTacToe.isGameOver()) {
                                             System.out.println(ticTacToe.getBoard());
                                             System.out.println("You won! " + player.getName() + " ID:" + player.getId());
-                                            ticTacToe.exit();
+                                            ticTacToe.exit(); //Remove jogadores do jogo
                                             return;
                                         }
                                         stopLoop = false;
-                                    }else {
+                                    }else  {
+                                        //Se a jogada for inválida, avisa que a jogada é inválida
                                         System.out.println("Invalid play,try again");
                                     }
                                 }while(!validPlay && ticTacToe.getNumOfPlayers() == 2);
@@ -97,12 +98,11 @@ public class GameClient {
                                 }
                             }
                         }
-                        //Se o jogo acabou e não for o vencedor
-                        //Como a verificação de vencedor é feita no método play
+                        //Como a verificação de vencedor é feita durante a jogada do jogador
                         //Aqui mostra a mensagem de que o jogador perdeu!
                         System.out.println(ticTacToe.getBoard());
                         System.out.println("Game ended, you lost!");
-                        ticTacToe.exit();
+                        ticTacToe.exit(); //Remove jogadores do jogo
                         return;
                     }
 

@@ -76,7 +76,7 @@ public class TicTacToe extends UnicastRemoteObject implements TicTacToeInterface
     @Override
     //Verifica se a jogada é válida
     public Boolean isValidMove(int x, int y) throws RemoteException {
-        if(x <= 0 || x > 3 || y <= 0 || y > 3){
+        if(x <= 0 || x > 3 || y <= 0 || y > 3 ){
             return false;
         }
         if(board[x - 1 ][y - 1] == 0){
@@ -126,6 +126,7 @@ public class TicTacToe extends UnicastRemoteObject implements TicTacToeInterface
     //Make the play
     public void play(Player player, int row, int col) throws Exception {
         this.board[row - 1][col - 1] = player.getId();
+        System.out.println("Player " + player.getName() + " played in row " + row + " and col " + col);
     }
 
     @Override
@@ -137,6 +138,7 @@ public class TicTacToe extends UnicastRemoteObject implements TicTacToeInterface
                     return false;
                 }
             }
+
         }
         return true;
     }

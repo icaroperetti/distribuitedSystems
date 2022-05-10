@@ -16,7 +16,8 @@ public class Server {
             System.out.println("Server ready");
 
             while(true){
-                if(game.isGameOver() && game.getNumOfPlayers() == 0){
+                if(game.checkTie() || game.checkWin() && game.getNumOfPlayers() == 0){
+                    System.out.println("Qtd de jogadores: " + game.getNumOfPlayers());
                     System.out.println("Game ended");
                     break;
                 }

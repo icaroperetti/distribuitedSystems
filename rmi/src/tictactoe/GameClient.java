@@ -3,6 +3,7 @@ package tictactoe;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class GameClient {
     public static void main(String[] args) {
@@ -36,25 +37,28 @@ public class GameClient {
 
             if(msg.getCode() == 1){
                 do{
-                    System.out.println("1 - Play");
-                    opt = Integer.parseInt(in.nextLine());
-                    if(opt == 1){
-                        ticTacToe.getNumOfPlayers();
-
+                        //ticTacToe.getNumOfPlayers();
                         //Checa se a quantidade de jogadores é suficiente
                         while(!ticTacToe.gameCanBePlayed()){
-                            if(!stopLoop) {
-                                System.out.println("Waiting for other player to start the game");
+                            if(ticTacToe.getNumOfPlayers() == 1){
+                                System.out.println("Waiting for other player to start the game...");
                                 //Mudando o valor do stopLoop para true para parar o loop
-                                stopLoop = true;
+                                TimeUnit.SECONDS.sleep(3);
+                            }else {
+                                System.out.println("Game started");
                             }
                         }
                         //Se a quantidade de jogadores for suficiente, o jogo pode ser iniciado
-                        System.out.println("Game started");
-                        stopLoop = false;
+                       // System.out.println("Game started");
+                        //stopLoop = false;
 
                         //Enquando o jogo não for finalizado, o loop será executado
-                        while(!ticTacToe.isGameOver()){
+                        while(!ticTacToe.checkWin()){
+                            if(ticTacToe.checkTie()){
+                                System.out.println("Game ended, it's a Tie!");
+                                ticTacToe.exit();
+                                return;
+                            }
                             if(ticTacToe.getPlayerTurn(id)){
                                 do {
                                     //Avisando de qual jogador é a sua vez e mostrando o tabuleiro
@@ -63,31 +67,31 @@ public class GameClient {
 
                                     //Pedindo a linha e a coluna
                                     System.out.println("Enter row: ");
-                                    row = Integer.parseInt(in.nextLine());
+                                    row = in.nextInt();
                                     System.out.println("Enter col: ");
-                                    col = Integer.parseInt(in.nextLine());
+                                    col = in.nextInt();
 
                                     //Armazenando se a jogada é válida
                                     validPlay = ticTacToe.isValidMove(row, col);
 
-                                    //Se a jogada for valida, verifica se o jogo acabou
-
+                                    //Se a jogada for valida, verifica se o jogo acabou ou não
+                                    //Se não acabou troca de jogador
                                     if(validPlay){
                                         ticTacToe.play(player,row, col);
-                                        ticTacToe.switchPlayer();
                                         //Se o jogador vencer nesta jogada,mostra o tabuleiro e termina o jogo
-                                        if (ticTacToe.isGameOver()) {
+                                        if (ticTacToe.checkWin()) {
                                             System.out.println(ticTacToe.getBoard());
                                             System.out.println("You won! " + player.getName() + " ID:" + player.getId());
                                             ticTacToe.exit(); //Remove jogadores do jogo
                                             return;
                                         }
+                                        ticTacToe.switchPlayer();
                                         stopLoop = false;
                                     }else  {
                                         //Se a jogada for inválida, avisa que a jogada é inválida
                                         System.out.println("Invalid play,try again");
                                     }
-                                }while(!validPlay && ticTacToe.getNumOfPlayers() == 2);
+                                }while(!validPlay);
                             }
                             //Se não for a sua vez, avisa que é a vez do outro jogador
                             else{
@@ -101,11 +105,11 @@ public class GameClient {
                         //Como a verificação de vencedor é feita durante a jogada do jogador
                         //Aqui mostra a mensagem de que o jogador perdeu!
                         System.out.println(ticTacToe.getBoard());
-                        System.out.println("Game ended, you lost!");
-                        ticTacToe.exit(); //Remove jogadores do jogo
-                        return;
-                    }
-
+                        if(!ticTacToe.checkTie()) {
+                            System.out.println("Game ended, you lost!");
+                            ticTacToe.exit(); //Remove jogadores do jogo
+                            return;
+                        }
                 }while (opt != 0);
             }
         } catch (Exception e) {

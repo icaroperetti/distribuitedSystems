@@ -1,5 +1,7 @@
 package tictactoe;
 
+import tictactoe.Player;
+
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -9,8 +11,10 @@ import java.util.List;
 public class TicTacToe extends UnicastRemoteObject implements TicTacToeInterface {
     private List<Player> players;
     private int numOfPlayers;
-
-    int board[][];
+    private int[][] board;
+    private boolean hasPermission = true;
+    private Player firstPlayer;
+    private Player secondPlayer;
 
 
     protected TicTacToe() throws RemoteException {
@@ -29,30 +33,19 @@ public class TicTacToe extends UnicastRemoteObject implements TicTacToeInterface
         return false;
     }
 
-    public int getNumOfPlayers() {
-        return this.numOfPlayers;
-    }
-
     @Override
     public ReturnMessage enter(Player player) throws Exception {
         ReturnMessage returnMessage = new ReturnMessage();
         if(this.numOfPlayers < 2){
-            if (!checkPlayer(player)){
-                //Se for o primeiro jogador, será o primeiro a jogar
-                if(players.isEmpty()){
-                    player.setTurn(true); //Seta o jogador como o primeiro a jogar
-                }
-                this.players.add(player);
-                returnMessage.setCode(1);
-                returnMessage.setMessage("Player " + player.getName() + " has entered the game");
-                numOfPlayers++;
-                return returnMessage;
+            returnMessage.setCode(1);
+            returnMessage.setMessage("Player " + player.getName() + " has entered the game");
+            if (this.numOfPlayers == 0) {
+                this.firstPlayer = player;
+            } else {
+                this.secondPlayer = player;
             }
-            else{
-                returnMessage.setCode(2);
-                returnMessage.setMessage("Player " + player.getId() + " already exists");
-                return returnMessage;
-            }
+            numOfPlayers++;
+            return returnMessage;
         }else {
             returnMessage.setCode(3);
             returnMessage.setMessage("Game is full");
@@ -60,25 +53,29 @@ public class TicTacToe extends UnicastRemoteObject implements TicTacToeInterface
         }
     }
 
-    @Override
-    //Retorna a matriz que representa o "tabuleiro"
-    public String getBoard() throws RemoteException {
+    public String showBoard() throws Exception {
         StringBuilder boardString = new StringBuilder();
         for(int i = 0; i < 3; i++){
-            for(int j = 0; j < 3; j++){
-                boardString.append(board[i][j]).append("   ");
+            for(int j = 0; j < 3;j++){
+                boardString.append(Integer.toString(board[i][j])).append(" ");
             }
             boardString.append("\n");
         }
         return boardString.toString();
     }
 
+    public int[][] getBoard() throws Exception {
+        return this.board;
+    }
+
     @Override
     //Verifica se a jogada é válida
     public Boolean isValidMove(int x, int y) throws RemoteException {
+        //Validação de coordenadas, não podendo ser superior a 3 e inferior ou igual a 0
         if(x <= 0 || x > 3 || y <= 0 || y > 3 ){
             return false;
         }
+        //Validação de jogada, não podendo ser repetida
         if(board[x - 1 ][y - 1] == 0){
             return true;
         }else{
@@ -87,63 +84,7 @@ public class TicTacToe extends UnicastRemoteObject implements TicTacToeInterface
     }
 
     @Override
-    public void exit(){
-        this.players.clear();
-        this.numOfPlayers = 0;
-    }
-
-
-    @Override
-    //Verifica se o jogo possui 2 jogadores para que possa iniciar
-    public Boolean gameCanBePlayed() throws RemoteException {
-        return this.numOfPlayers == 2;
-    }
-
-    @Override
-    //Faz a troca de jogador (turno)
-    public void switchPlayer(){
-        for(int i=0 ; i<players.size(); i++){
-            if(players.get(i).getIsTurn() == true){
-                players.get(i).setTurn(false);
-            }else{
-                players.get(i).setTurn(true);
-            }
-        }
-
-    }
-    @Override
-    //Verifica se é a vez do jogador com este id jogar
-    public Boolean getPlayerTurn(int id){
-        for(Player p : players){
-            if(p.getId() == id){
-                return p.getIsTurn();
-            }
-        }
-        return false;
-    }
-
-    @Override
-    //Make the play
-    public void play(Player player, int row, int col) throws Exception {
-        this.board[row - 1][col - 1] = player.getId();
-        System.out.println("Player " + player.getName() + " played in row " + row + " and col " + col);
-    }
-
-    @Override
-    //Check Tie (Velha)
-    public Boolean checkTie() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (board[i][j] == 0) {
-                    return false;
-                }
-            }
-
-        }
-        return true;
-    }
-
-    //Verifica se algum jogador ganhou
+    //Verifica se existe vencedor
     public Boolean checkWin(){
         for(int i = 0; i < 3; i++) {
             //Verifica linhas
@@ -175,7 +116,42 @@ public class TicTacToe extends UnicastRemoteObject implements TicTacToeInterface
         return false;
     }
 
-    public Boolean isGameOver(){
-        return checkWin() || checkTie();
+    @Override
+    //Verifica se o jogador possui permissão para jogar
+    public boolean playerCanPlay(Player player){
+        if(firstPlayer != null && secondPlayer != null){
+            if (player.getId() == firstPlayer.getId() && this.hasPermission){
+                return true;
+            }
+            return player.getId() == secondPlayer.getId() && !this.hasPermission;
+        }
+        return false;
+    }
+
+
+    @Override
+    //Verifica se deu velha
+    public Boolean checkTie() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (board[i][j] == 0) {
+                    return false;
+                }
+            }
+
+        }
+        return true;
+    }
+    @Override
+    public void play(Player player, int row, int col) throws Exception {
+            //Atribui o valor ao board na linha e coluna -1
+            this.board[row - 1][col - 1] = player.getId();
+            //Realiza a troca de jogadores
+            if (player.getId() == firstPlayer.getId()) {
+                this.hasPermission = false;
+            }
+            if (player.getId() == secondPlayer.getId()) {
+                this.hasPermission = true;
+            }
     }
 }

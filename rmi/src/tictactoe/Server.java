@@ -1,5 +1,8 @@
 package tictactoe;
 
+import tictactoe.TicTacToe;
+import tictactoe.TicTacToeInterface;
+
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -11,17 +14,10 @@ public class Server {
         try {
             Registry registry = LocateRegistry.createRegistry(12345);
             TicTacToeInterface game = new TicTacToe();
-
             registry.bind("TicTacToe", game);
             System.out.println("Server ready");
 
-            while(true){
-                if(game.checkTie() || game.checkWin() && game.getNumOfPlayers() == 0){
-                    System.out.println("Qtd de jogadores: " + game.getNumOfPlayers());
-                    System.out.println("Game ended");
-                    break;
-                }
-            }
+
         } catch (RemoteException | AlreadyBoundException e) {
             e.printStackTrace();
         } catch (Exception e) {

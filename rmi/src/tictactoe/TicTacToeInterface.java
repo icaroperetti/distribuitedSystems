@@ -1,32 +1,24 @@
 package tictactoe;
 
+import tictactoe.Player;
+
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 //Server
 public interface TicTacToeInterface extends Remote {
 
     public ReturnMessage enter(Player player) throws Exception;
-
-
     public void play(Player player, int row, int col) throws Exception;
 
-    public String getBoard() throws Exception;
-
-    public Boolean gameCanBePlayed() throws Exception;
-
-    public void switchPlayer() throws Exception;
-
-    public Boolean checkTie() throws Exception;
-
-    public Boolean checkWin() throws Exception;
+    public String showBoard() throws Exception ;
+    public int[][] getBoard() throws Exception;
 
     public Boolean isValidMove(int x, int y) throws Exception;
 
-    public void exit() throws Exception;
+    public Boolean checkWin() throws Exception;
 
-    public Boolean getPlayerTurn(int id) throws Exception;
+    public Boolean checkTie() throws Exception;
 
-   public int getNumOfPlayers() throws Exception;
-   public Boolean isGameOver() throws Exception;
-
+    public boolean playerCanPlay(Player player) throws Exception;
 }

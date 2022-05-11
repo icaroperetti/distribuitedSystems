@@ -1,18 +1,17 @@
 package tictactoe;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.Random;
 
 //Client
 public class Player implements Serializable {
     private String name;
     private int id;
 
-    private boolean isTurn;
-
-    public Player(String name, int id, boolean isTurn) {
+    public Player(String name, int id) {
         this.name = name;
         this.id = id;
-        this.isTurn = isTurn;
     }
 
     public String getName() {
@@ -23,11 +22,4 @@ public class Player implements Serializable {
         return id;
     }
 
-    public boolean getIsTurn() {
-        return isTurn;
-    }
-
-    public void setTurn(boolean isTurn) {
-        this.isTurn = isTurn;
-    }
 }

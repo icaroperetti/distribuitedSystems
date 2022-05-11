@@ -9,7 +9,7 @@ import java.util.List;
 
 //Server
 public class TicTacToe extends UnicastRemoteObject implements TicTacToeInterface {
-    private List<Player> players;
+   // private List<Player> players;
     private int numOfPlayers;
     private int[][] board;
     private boolean hasPermission = true;
@@ -19,11 +19,12 @@ public class TicTacToe extends UnicastRemoteObject implements TicTacToeInterface
 
     protected TicTacToe() throws RemoteException {
         super();
-        this.players = new ArrayList<>();
+        //this.players = new ArrayList<>();
         this.numOfPlayers = 0;
         this.board = new int[3][3];
     }
 
+    /*
     private boolean checkPlayer(Player player) {
         for (Player p : players) {
             if (p.getId() == player.getId()) {
@@ -32,6 +33,8 @@ public class TicTacToe extends UnicastRemoteObject implements TicTacToeInterface
         }
         return false;
     }
+
+     */
 
     @Override
     public ReturnMessage enter(Player player) throws Exception {
@@ -58,7 +61,6 @@ public class TicTacToe extends UnicastRemoteObject implements TicTacToeInterface
     }
 
     public void removeAllPlayers(){
-        this.players.clear();
         this.numOfPlayers = 0;
     }
 
@@ -93,7 +95,7 @@ public class TicTacToe extends UnicastRemoteObject implements TicTacToeInterface
     }
 
     @Override
-    //Verifica se existe vencedor
+    //Verifica se alguma linha, coluna ou diagonal está preenchida com 3 idênticos
     public Boolean checkWin(){
         for(int i = 0; i < 3; i++) {
             //Verifica linhas
@@ -147,7 +149,6 @@ public class TicTacToe extends UnicastRemoteObject implements TicTacToeInterface
                     return false;
                 }
             }
-
         }
         return true;
     }

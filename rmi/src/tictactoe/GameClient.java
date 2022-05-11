@@ -37,7 +37,6 @@ public class GameClient {
                 id = (int) (date.getTime() % (randomNumber * 2 + 3));
             }
 
-
             System.out.println("Your id is: " + id);
 
             Player player = new Player(name, id);

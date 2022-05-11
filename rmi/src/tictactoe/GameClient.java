@@ -47,7 +47,7 @@ public class GameClient {
               do{
                   if(ticTacToe.getNumOfPlayers() == 1){
                       System.out.println("Waiting for other player to start the game...");
-                      //Mudando o valor do stopLoop para true para parar o loop
+                      
                       TimeUnit.SECONDS.sleep(3);
                   }else {
                       System.out.println("Game started");

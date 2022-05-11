@@ -27,7 +27,7 @@ Execução do cliente ruby:
 ```
 
 Caso queria testar o cliente Python:
-Execução cliente python:
+
 
 ```
     python client.py

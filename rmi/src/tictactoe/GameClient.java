@@ -33,9 +33,7 @@ public class GameClient {
             int randomNumber = rand.nextInt(maxNumber) + 1;
             Date date = new Date();
 
-
-            id = (int) (date.getTime() % (randomNumber * 2 + 3));
-            if (id == 0) {
+            while(id == 0) {
                 id = (int) (date.getTime() % (randomNumber * 2 + 3));
             }
 
@@ -48,9 +46,17 @@ public class GameClient {
            System.out.println(msg.getMessage());
 
               do{
+                  if(ticTacToe.getNumOfPlayers() == 1){
+                      System.out.println("Waiting for other player to start the game...");
+                      //Mudando o valor do stopLoop para true para parar o loop
+                      TimeUnit.SECONDS.sleep(3);
+                  }else {
+                      System.out.println("Game started");
+                  }
                   while (!ticTacToe.checkWin()) {
                       if(ticTacToe.checkTie()){
                           System.out.println("Tie!");
+                          ticTacToe.removeAllPlayers();
                           return;
                       }
                       if (ticTacToe.playerCanPlay(player)) {
@@ -63,9 +69,11 @@ public class GameClient {
                               validPlay = ticTacToe.isValidMove(row, col);
                               if (validPlay) {
                                   ticTacToe.play(player, row, col);
+                                  System.out.println(ticTacToe.showBoard());
                                   if (ticTacToe.checkWin()) {
                                       System.out.println("You won! " + player.getName());
                                       System.out.println(ticTacToe.showBoard());
+                                      ticTacToe.removeAllPlayers();
                                       return;
                                   }
                               } else {
@@ -80,6 +88,7 @@ public class GameClient {
                   }
                   if(!ticTacToe.checkTie()){
                       System.out.println("You Lost!");
+                      ticTacToe.removeAllPlayers();
                       return;
                   }
               }while (opt != 0);

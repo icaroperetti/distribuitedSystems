@@ -53,6 +53,15 @@ public class TicTacToe extends UnicastRemoteObject implements TicTacToeInterface
         }
     }
 
+    public int getNumOfPlayers() {
+        return this.numOfPlayers;
+    }
+
+    public void removeAllPlayers(){
+        this.players.clear();
+        this.numOfPlayers = 0;
+    }
+
     public String showBoard() throws Exception {
         StringBuilder boardString = new StringBuilder();
         for(int i = 0; i < 3; i++){

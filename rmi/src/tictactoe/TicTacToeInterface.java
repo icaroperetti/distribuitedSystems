@@ -20,5 +20,9 @@ public interface TicTacToeInterface extends Remote {
 
     public Boolean checkTie() throws Exception;
 
+    public int getNumOfPlayers() throws Exception;
+
+    public void removeAllPlayers() throws Exception;
+
     public boolean playerCanPlay(Player player) throws Exception;
 }

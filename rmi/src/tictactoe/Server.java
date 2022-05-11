@@ -15,14 +15,6 @@ public class Server {
             registry.bind("TicTacToe", game);
             System.out.println("Server ready");
 
-            while(true){
-                if(game.checkTie() || game.checkWin()){
-                    if(game.getNumOfPlayers() == 0){
-                        System.out.println("Game ended");
-                        break;
-                    }
-                }
-            }
 
         } catch (RemoteException | AlreadyBoundException e) {
             e.printStackTrace();

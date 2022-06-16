@@ -9,4 +9,4 @@ Repositório para armazenar trabalhos desenvolvidos durante a disciplina de Sist
 
 - <a href="https://github.com/icaroperetti/distribuitedSystems/tree/main/sockets/quiz">Quiz utilizando Socket</a>
 
-
+- <a href="https://github.com/icaroperetti/distribuitedSystems/tree/main/syncronization">Sincronização de Relógios</a>

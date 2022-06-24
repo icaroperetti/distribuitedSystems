@@ -7,7 +7,7 @@ Repositório para armazenar trabalhos desenvolvidos durante a disciplina de Sist
 
 -  <a href="https://github.com/icaroperetti/distribuitedSystems/tree/main/syncronization">Projeto - Sincronização de Relógios</a>
 
-- <a href="/">Projeto - Springboot 2pc API Rest</a>
+- <a href="https://github.com/icaroperetti/distribuitedSystems">Projeto - Springboot 2pc API Rest</a>
 
 -  <a href="https://github.com/icaroperetti/distribuitedSystems/tree/main/sockets/file-transfer-python/socket">Transferência de Arquivo Socket (Ruby e Python)</a>
 
